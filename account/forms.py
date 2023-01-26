@@ -3,6 +3,7 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 from account.models import User
 
+
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
@@ -41,3 +42,13 @@ class UserChangeForm(forms.ModelForm):
         model = User
         fields = '__all__'
 
+
+class Login_Form(forms.Form):
+    phone = forms.CharField(
+        widget=forms.TextInput(
+        attrs={'type':'text','placeholder':'phone'}
+    ))
+    password = forms.CharField(
+        widget=forms.TextInput(
+         attrs={'type':'password','placeholder':'password'}
+    ))

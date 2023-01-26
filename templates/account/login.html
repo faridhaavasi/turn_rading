@@ -245,24 +245,27 @@ form{
 @keyframes square {
   0%   { transform: translateY(0); }
   100% { transform: translateY(-700px) rotate(600deg); }
+  d-print-none {
+    display: none !important;
+  }
 }
+
 </style>
 
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
-    <title>logint</title>
+    <title>login</title>
 </head>
 <body>
 <div class="wrapper">
 	<div class="container">
-		<h1>Welcome</h1>
+		<h1>ثبت نام</h1>
 
 		<form class="form">
-			<input type="text" placeholder="Username">
-			<input type="password" placeholder="Password">
-			<button type="submit" id="login-button">Login</button>
+			{{ form }}
+			<button type="submit" id="button">ثبت نام</button>
 		</form>
 	</div>
 
