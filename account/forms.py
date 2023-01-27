@@ -45,11 +45,11 @@ class UserChangeForm(forms.ModelForm):
 class Login_Form(forms.Form):
     phone = forms.CharField(
         widget=forms.TextInput(
-        attrs={'type':'text','placeholder':'phone'}
+        attrs={'type':'text','placeholder':'شماره همراه'}
     ))
     password = forms.CharField(
         widget=forms.TextInput(
-         attrs={'type':'password','placeholder':'password'}
+         attrs={'type':'password','placeholder':'پسورد'}
     ))
 
     def clean_phone(self):
