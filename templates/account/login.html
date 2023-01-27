@@ -261,7 +261,7 @@ form{
 <body>
 <div class="wrapper">
 	<div class="container">
-		<h1>ثبت نام</h1>
+		<h1>ورود</h1>
 
 		<form class="form" method="post">
             {% csrf_token %}
@@ -271,7 +271,12 @@ form{
                 {% endfor %}
             {% endif %}
 			{{ form }}
-			<button type="submit" id="button">ثبت نام</button>
+            {% if form.phone.errors %}
+                 {% for error in form.phone.errors %}
+                     <p type="alert.danger">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+			<button type="submit" id="button">ورود</button>
 		</form>
 	</div>
 

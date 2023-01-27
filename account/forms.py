@@ -2,8 +2,7 @@ from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 from account.models import User
-
-
+from django.core import validators
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
@@ -52,3 +51,11 @@ class Login_Form(forms.Form):
         widget=forms.TextInput(
          attrs={'type':'password','placeholder':'password'}
     ))
+
+    def clean_phone(self):
+        phone = self.cleaned_data.get('phone')
+        if phone[0:1] != '09':
+            raise ValidationError('ماره حتما باید تلفن همراه باشد','invalid lrn phone_number')
+        if len(phone) > 11:
+            raise ValidationError('ماره تلفن صحیح نیست','invalid phone_number')
+        return phone
