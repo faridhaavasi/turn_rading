@@ -59,3 +59,11 @@ class Login_Form(forms.Form):
         if len(phone) > 11:
             raise ValidationError('ماره تلفن صحیح نیست','invalid phone_number')
         return phone
+
+class Registerform(forms.Form):
+     phone = forms.CharField(
+        widget=forms.TextInput(
+        attrs={'type':'text','placeholder':'شماره همراه'}
+    ))
+     
+    

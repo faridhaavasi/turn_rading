@@ -65,3 +65,16 @@ class User(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+    
+    
+    class otp(models.Model):
+        phone=models.CharField(max_length=11)
+        code=models.CharField(max_length=4)
+        expertion_date=models.DateTimeField(auto_now_add=True)
+        
+        class Meta:
+            ordering=['phone']
+            
+        def __str__(self):
+            return self.phone    
+        
