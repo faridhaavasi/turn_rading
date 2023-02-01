@@ -67,14 +67,15 @@ class User(AbstractBaseUser):
         return self.is_admin
     
     
-    class otp(models.Model):
-        phone=models.CharField(max_length=11)
-        code=models.CharField(max_length=4)
-        expertion_date=models.DateTimeField(auto_now_add=True)
+class otp(models.Model):
+    token=models.CharField(max_length=100,null=True)
+    phone=models.CharField(max_length=11)
+    code=models.CharField(max_length=4,null=True,blank=True)
+    expertion_date=models.DateTimeField(auto_now_add=True)
         
-        class Meta:
-            ordering=['phone']
+    class Meta:
+        ordering=['phone']
             
-        def __str__(self):
-            return self.phone    
+    def __str__(self):
+        return self.phone    
         

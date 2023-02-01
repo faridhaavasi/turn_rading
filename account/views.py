@@ -1,9 +1,11 @@
 from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,reverse
+from django.utils.crypto import get_random_string
 from django.views.generic import View
-from .forms import Login_Form,Registerform
+from .forms import Login_Form,Registerform,CheckotpForm
 import random
 import ghasedakpack
+from .models import otp,User
 # Create your views here.
 
 
@@ -21,7 +23,7 @@ class user_login(View):
             cd = form.cleaned_data #hint:is instans in next by is_vaiid
 
             user = authenticate(username=cd['phone'], password=cd['password']) #username=usernamecustom
-
+              
             if user is not None:
                 login(request, user)
                 return redirect('web:home')
@@ -47,8 +49,31 @@ class User_register(View):
         form=Registerform(data=request.POST) #instatnse is registerfom in data+requuest.POST
         if form.is_valid():
             cd=form.cleaned_data
-            code=random.randint(1000,9999)
-            sms.verification({'receptor': cd['phone'],'type': '1','template': '	turn_rading_11','param1': str(code)})
+            random_code=random.randint(1000,9999)
+            token=get_random_string(length=10)
+            print(random_code)
+            sms.verification({'receptor': cd['phone'],'type': '1','template': 'turn_rading_11','param1': str(random_code)})
+            otp.objects.create(phone=cd['phone'],code=random_code,token=token)
+            return redirect(reverse('account:checkotp')+f'?={token}') 
         return render(request,'account/register.html',{'form':form})       
-         
-        
+    
+    
+class checkotp(View):
+    def get(self,request):
+        form=CheckotpForm() #instans is a ckeckotpformform null
+        return render(request,'account/checkotp.html',{'form':form})
+
+    
+    def post(self,request):
+        token=request.GET.get('token')
+        form=CheckotpForm(data=request.POST) #instatnse is checkotpform in data+requuest.POST
+        if form.is_valid():
+            cd=form.cleaned_data
+            if otp.objects.filter(code=cd['code'],token=token).exists():
+                Otp=otp.objects.get(token=token)
+                user=User.objects.create_user(phone=Otp.phone)
+                login(request,user)
+            return redirect('web:home')
+        return render(request,'account/checkotp.html',{'form':form})                
+                
+                 

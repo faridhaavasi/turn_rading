@@ -66,4 +66,11 @@ class Registerform(forms.Form):
         attrs={'type':'text','placeholder':'شماره همراه'}
     ))
      
-    
+
+
+class CheckotpForm(forms.Form):
+     code = forms.CharField(
+        widget=forms.TextInput(
+        attrs={'type':'text','placeholder':'کد تایید'}
+    ))
+         
