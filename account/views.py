@@ -1,11 +1,12 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect,reverse
 from django.utils.crypto import get_random_string
-from django.views.generic import View
+from django.views.generic import View, UpdateView
 from .forms import Login_Form,Registerform,CheckotpForm
 import random
 import ghasedakpack
 from .models import otp,User
+
 # Create your views here.
 
 
@@ -65,7 +66,7 @@ class checkotp(View):
 
     
     def post(self,request):
-        token=request.GET.get('token')
+        token=request.GET.get('token')#get data in url
         form=CheckotpForm(data=request.POST) #instatnse is checkotpform in data+requuest.POST
         if form.is_valid():
             cd=form.cleaned_data
@@ -73,7 +74,8 @@ class checkotp(View):
                 Otp=otp.objects.get(token=token)
                 user=User.objects.create_user(phone=Otp.phone)
                 login(request,user)
-            return redirect('web:home')
+            return redirect(reverse('web:home'))
         return render(request,'account/checkotp.html',{'form':form})                
-                
-                 
+    
+
+

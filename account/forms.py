@@ -73,4 +73,3 @@ class CheckotpForm(forms.Form):
         widget=forms.TextInput(
         attrs={'type':'text','placeholder':'کد تایید'}
     ))
-         
