@@ -29,13 +29,13 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <div class="کذ تایید" data-tilt>
+            <div class="" data-tilt>
 
             </div>
 
-            <form class="login100-form validate-form", method="post">
+            <form class="login100-form validate-form" , method="post">
 					<span class="login100-form-title">
-			               شماره خوذ را جهت ارسال کد تایید وارد کنید   
+                        اطلاعات خود را وارد کنید
 					</span>
 
                 <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
@@ -45,17 +45,26 @@
                             <p type="alert.danger">{{ error }}</p>
                         {% endfor %}
                     {% endif %}
-                    {{ form }}
+                    {{ form.phone }}
                     {% if form.phone.errors %}
                         {% for error in form.phone.errors %}
                             <p type="alert.danger">{{ error }}</p>
                         {% endfor %}
                     {% endif %}
+                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                        {{ form.fullname }}
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                        {{ form.file_number }}
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                        {{ form.password }}
+                    </div>
                 </div>
 
                 <div class="container-login100-form-btn">
                     <button class="login100-form-btn">
-                        ارسال کد
+                            ارسال
                     </button>
                 </div>
 
@@ -63,7 +72,7 @@
 						<span class="txt1">
 
 						</span>
-                  
+
                     </a>
                 </div>
             </form>

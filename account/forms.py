@@ -65,11 +65,20 @@ class Registerform(forms.Form):
         widget=forms.TextInput(
         attrs={'type':'text','placeholder':'شماره همراه'}
     ))
+     fullname = forms.CharField(
+        widget=forms.TextInput(
+        attrs={'type':'text','placeholder':'نام کامل بیمار'}
+    ))
+     file_number = forms.CharField(
+        widget=forms.TextInput(
+        attrs={'type':'text','placeholder':'شماره پرونده بیمار'}
+    ))
+     password = forms.CharField(
+        widget=forms.TextInput(
+        attrs={'type':'text','placeholder':'یک گذرواژه وارد کنید'}
+    ))
+
+
      
 
 
-class CheckotpForm(forms.Form):
-     code = forms.CharField(
-        widget=forms.TextInput(
-        attrs={'type':'text','placeholder':'کد تایید'}
-    ))
