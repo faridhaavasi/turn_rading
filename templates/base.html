@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+   {% include 'includes/head.html' %}
+    <body>
+        <!-- Navigation-->
+    {% include 'includes/navigation.html' %}
+        <!-- Header-->
+    {% include 'includes/header.html' %}
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+              {% block main %}
+
+
+
+                {% endblock %}
+                    </div>
+
+                    
+        </section>
+        <!-- Footer-->
+       {% include 'includes/footer.html' %}
+    </body>
+</html>
